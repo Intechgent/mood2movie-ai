@@ -79,7 +79,7 @@ Each saved movie entry is stored with context, not just a title:
 1. **Clone the repository**
 
 ```bash
-git clone [https://github.com/yourusername/mood2movie-ai.git](https://github.com/yourusername/mood2movie-ai.git)
+git clone [https://github.com/Intechgent/mood2movie-ai.git](https://github.com/Intechgent/mood2movie-ai.git)
 cd mood2movie-ai
 ```
 
@@ -91,7 +91,7 @@ pip install -r requirements.txt
 
 Create a .env file in the project root
 ```
-GOOGLE_API_KEY=your_actual_key_here
+API_KEY=your_api_key
 ```
 4. **Run the application**
 ```
