@@ -84,20 +84,16 @@ cd mood2movie-ai
 ```
 
 2. **Install dependencies**
-
+```
 pip install -r requirements.txt
-
+```
 3. **Configure API key**
 
 Create a .env file in the project root
-
+```
 GOOGLE_API_KEY=your_actual_key_here
-
+```
 4. **Run the application**
-
+```
 streamlit run movies.py
-
-
----
-
-## Tech Stack
+```
