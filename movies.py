@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-# --- 1. PERSISTENCE LAYER ---
+# Persistence layer
 USER_DIR = "users"
 
 def save_to_db(username, library):
@@ -26,7 +26,7 @@ def load_from_db(username):
             return json.load(f)
     return {}
 
-# --- 2. INITIALIZATION ---
+# Initializing API key
 load_dotenv()
 api_key = os.getenv("GOOGLE_API_KEY")
 
@@ -45,7 +45,7 @@ else:
     st.error("❌ API Key missing.")
     st.stop()
 
-# --- 3. DATA UTILITIES ---
+# Loading data
 @st.cache_data
 def load_movie_data():
     try:
@@ -56,7 +56,7 @@ def load_movie_data():
     except FileNotFoundError:
         return None
 
-# --- 4. PAGE FUNCTIONS ---
+# Page setup
 
 def show_landing_page():
     st.markdown("<h1 style='text-align: center;'>🎬 Mood2Movie AI</h1>", unsafe_allow_html=True)
@@ -76,7 +76,7 @@ def show_login_page():
         if st.form_submit_button("Login"):
             if name:
                 st.session_state.user_name = name
-                # LOAD PERSISTENT DATA
+                # Loading persistent data
                 st.session_state.library = load_from_db(name)
                 st.session_state.page = "app"
                 st.rerun()
@@ -97,7 +97,7 @@ def show_app_page():
     tab1, tab2 = st.tabs(["🔍 Discover", "📚 My Library"])
     movies = load_movie_data()
 
-    # --- TAB 1: DISCOVER ---
+    # Tab 1
     with tab1:
         moods = sorted(movies["mood"].unique())
         genres = ["All"] + sorted(movies["genre"].unique())
@@ -149,7 +149,7 @@ def show_app_page():
                             st.toast(f"Added {rec['title']}!")
                             st.rerun()
 
-    # --- TAB 2: LIBRARY ---
+    # Tab 2 - Library
     with tab2:
         st.header("Your Saved Library")
         if not st.session_state.library:
@@ -180,7 +180,7 @@ def show_app_page():
                         save_to_db(st.session_state.user_name, st.session_state.library)
                         st.rerun()
 
-# --- SPA ROUTER ---
+# Router
 if st.session_state.page == "landing":
     show_landing_page()
 elif st.session_state.page == "login":
